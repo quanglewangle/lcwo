@@ -8,8 +8,7 @@ $myurl= BASEURL;
  
 <feed xmlns="http://www.w3.org/2005/Atom"> 
 <?
-$q = mysqli_query($db,"select `date`, `news`, `id` from lcwo_news order by id desc
-limit 10");
+$q = mysqli_query($db,"select `date`, `news`, `id` from lcwo_news order by id desc limit 10");
 while ($r = mysqli_fetch_row($q)) {
 $x++;
 
@@ -32,7 +31,7 @@ if ($x == 1) {
 $text = $r[1];
 $text = strip_tags($text);
 $text = mb_convert_encoding($text, 'UTF-8', "ISO-8859-1");
-$text = preg_replace_callback('/&#([0-9]+);/', create_function ( '$matches', 'return mb_convert_encoding(pack(\'n\', $matches[1]), \'UTF-8\', \'UTF-16BE\');') , $text);
+$text = preg_replace_callback('/&#([0-9]+);/', function ($matches) {  return mb_convert_encoding(pack('n', $matches[1]), 'UTF-8', 'UTF-16BE'); }, $text);
 $text = preg_replace("/&/", "&amp;", $text);
 
 ?>	
