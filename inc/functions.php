@@ -696,7 +696,13 @@ if (is_array($ydata2) && (max($ydata2) >= 100)) {
 
 # calculate neccesary label distances etc.
 # data points
-$m = count($ydata1);
+#
+if (is_array($ydata1)) {
+	$m = count($ydata1);
+}
+else {
+	$m = 0;
+}
 # x axis will have a maximum of $width / 50 labels.
 $xwidth = $width - $lspace - $rspace;	# drawing area
 $ywidth = $height - $tspace - $bspace;	# drawing area
@@ -1202,7 +1208,7 @@ function gettextsbylanguage1 ($type, $lang, $maxlen, $count, $simplify, $lesson)
 		$selected[$i] = $valid[$i]; 
 	}
 
-	$selectedstring = implode($selected, ', ');	
+	$selectedstring = implode(', ', $selected);
 	
 	$query = mysqli_query($db,"SELECT $item, lang from $table where ID in ($selectedstring);");
 
@@ -1523,7 +1529,7 @@ function CGIURL() {
     global $cgiserver;
     $proto = "https://";
     if (!$_SERVER['HTTPS']) {   # Docker etc.
-        $proto = "http://";
+#        $proto = "http://";
     }
     return $proto.$cgiserver."/cgi-bin/";
 }

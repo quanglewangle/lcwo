@@ -35,12 +35,12 @@ $height = 250;
 graph($width, $height, $score, array(0,max($score)), 
 						$max, array(0,max($max)),
 						array(), "words", array("Score",
-						"Speed", '', l(wpm)));
+						"Speed", '', l('wpm')));
 
 
 ?>
 
-<img src="/img/words<? echo imgurl($_SESSION[uid]); ?>.gif">
+<img src="/img/words<? echo imgurl($_SESSION['uid']); ?>.gif">
 
 <p><? echo l('bestscore').": ".$maxpts." ".l('points')." /
 ".$maxspeed."

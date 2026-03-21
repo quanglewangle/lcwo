@@ -145,7 +145,7 @@ if (is_numeric($_POST['tid']) && $_POST['text']) {
 	}
 	else {
 
-		$text = esc($_POST[text]);	
+		$text = esc($_POST["text"]);
 		$text = strip_tags($text);	
 
 		if (strlen($text) > 62000) {
