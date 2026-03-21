@@ -103,8 +103,6 @@ limited functionality without JavaScript.</p>
 </noscript>
 <?
 }
-if (!$_SERVER['HTTPS']) { ?> <a rel="nofollow" href="https://lcwo.net/">Click to switch to a secure connection (https).</a> <? }
-
 if ($_SESSION['consent'] == "0") {
 ?>
 Please be aware of LCWO's <a href="/privacy">privacy policy</a> to comply with the <a href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation">GDPR</a>.
