@@ -1,7 +1,6 @@
 php_flag register_globals off
 php_value session.use_only_cookies "1"
 php_value session.use_trans_sid "0"
-php_value session.save_path "/www/htdocs/v135911/lcwo/tmp_sess/"
 
 <Files register>
 order allow,deny
