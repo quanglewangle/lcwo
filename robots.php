@@ -14,6 +14,9 @@ else {
 Disallow: /cgi-bin/
 Disallow: /misc/
 Disallow: /register
+
+User-agent: *
+Crawl-delay: 10
 <?
 }
 ?>
