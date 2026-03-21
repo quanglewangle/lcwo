@@ -434,7 +434,7 @@ function updatesessiondownloads() {
 		// Check language array -- XXX duplicate code from wordtraining.
 		// put into function
 		$langarray = $_POST['wlanguage'];
-		if (count($langarray)) {
+		if (array_key_exists('wlanguage', $_POST) && count($langarray)) {
 		    foreach ($langarray as $ltmp) {
     		    # Language must be formed   LLx   e.g. de0  de1 ... it2 
        		 	if ((!in_array(substr($ltmp, 0, 2), $langs))
