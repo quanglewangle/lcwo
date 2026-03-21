@@ -13,9 +13,7 @@ a&#231;&#305;kt&#305;r. Yazarla temasa ge&#231;mek i&#231;in l&#252;tfen <a href
 bulunan t&#252;m kullan&#305;c&#305;lara te&#351;ekk&#252;r&#252; bor&#231; biliriz. B&#252;t&#252;n bu &#246;neri ve ele&#351;tiriler
 olmasayd&#305;, site bug&#252;n bulundu&#287;u yere gelemezdi!</p>
 
-<p><b>LCWO'yu kullanmak her zaman &#252;cretsiz olacakt&#305;r.</b> Parasal yard&#305;mlarla
-ilgilenmiyoruz ama (MP3/OGG k&#305;&#351;a&#287;&#305;) CGI'lar i&#231;in g&#252;venilir bir hosting bant
-geni&#351;li&#287;i sa&#287;lama imkan&#305;n&#305;z var ise l&#252;tfen bize bir <a href="mailto:help@lcwo.net">e-posta</a> g&#246;nderin.</p>
+<p><b>LCWO'yu kullanmak her zaman &#252;cretsiz olacakt&#305;r.</b></p>
 
 <h2>&#199;evirmenler</h2>
 <p>Kullan&#305;c&#305; aray&#252;z&#252;n&#252; yeni dillere &#231;eviren a&#351;a&#287;&#305;daki ki&#351;ilere te&#351;ekk&#252;r&#252; bir bor&#231; biliriz:</p>

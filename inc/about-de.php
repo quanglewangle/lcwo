@@ -12,7 +12,9 @@ eine E-Mail an <a href="mailto:help&#64;lcwo.net">help&#64;lcwo.net</a>.
 Für allgemeine Fragen und Diskussionen rund im LCWO und CW gibt es ein <a
 href="/forum">Forum</a>.  An dieser Stelle ein herzliches Dankeschön an die zahlreichen Benutzer, die sich durch konstruktive Kritik und gute Vorschläge an diesem Projekt beteiligt haben!</p> 
 
-<p><strong>Diese Seite ist nichtkommerziell und die Benutzung ist kostenlos.</strong> Es besteht kein Interesse an Geldspenden.</p>
+<p><strong>Diese Seite ist nichtkommerziell und die Benutzung ist kostenlos.</strong>
+Um die laufenden Kosten zu decken, werden <a href="https://fkurz.net/ham/budget">kleine Spenden</a> dankend angenommen.
+</p>
 
 <h2>Übersetzer</h2>
 <p><em>Vielen herzlichen Dank</em> an die folgenden Personen für die Übersetzung dieser Seite in eine der <?=count($langs);?> Sprachen, die LCWO anbietet:

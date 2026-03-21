@@ -22,7 +22,7 @@ the users who contributed to the project so far. Without all the
 feedback the site wouldn't be what it is today!</p>
 
 <p><strong>Using LCWO is and will always remain free of
-cost.</strong> We are not interested in monetary donations.
+cost.</strong> If you want to help to cover the running costs, <a href="https://fkurz.net/ham/budget">a small donation</a> is very appreciated.
 </p>
 
 <h2>Translators</h2>

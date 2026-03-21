@@ -14,11 +14,7 @@ Merci à tous les utilisateurs qui ont contribués au projet jusqu&rsquo;à
 présent. Sans tous ces retours d&rsquo;information le site ne serait pas
 ce qu&rsquo;il est aujourd&rsquo;hui !</p>
 
-<p><strong>L&rsquo;usage de LCWO est et restera toujours gratuit.</strong>
-Les dons ne nous intéressent pas, cela dit si vous êtes en mesure de fournir
-une bande passante fiable pour les CGI (génération des MP3/OGG), merci
-de <a href="mailto:help&#64;lcwo.net">nous contacter</a>.</p>
-
+<p><strong>L&rsquo;usage de LCWO est et restera toujours gratuit.</strong></p>
 
 <h2>Traducteurs</h2>
 
