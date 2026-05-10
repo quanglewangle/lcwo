@@ -14,6 +14,9 @@ Even more fine grained changes can be observed in the git repository:
 
 Started on 2009-02-08.
 
+2026-05-10:
+    * Added Catalan and Spanish proverbs to plain text training (thanks EA3AGK)
+
 2026-01-23:
     * Add volume control ("QRP"/"QRO") to Transmit practice (suggested by Algot2023)
 

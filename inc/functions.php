@@ -1026,13 +1026,19 @@ function simplify ($lang, $text) {
 			$replace['î'] = 'i';
 			break;
 		case 'es':
+		case 'ca':
 			$replace['à'] = 'a';
 			$replace['á'] = 'a';
 			$replace['é'] = 'e';
 			$replace['è'] = 'e';
 			$replace['í'] = 'i';
+			$replace['ï'] = 'i';
 			$replace['ñ'] = 'n';
 			$replace['ó'] = 'o';
+			$replace['ò'] = 'o';
+			$replace['ú'] = 'u';
+			$replace['ü'] = 'u';
+			$replace['ç'] = 'c';
 			break;
 		case 'pt':
 			$replace['á'] = 'a';
