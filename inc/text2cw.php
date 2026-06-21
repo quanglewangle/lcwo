@@ -22,6 +22,7 @@ function text2cw () {
     $text = str_replace('\\', '', $text);
     $hide = $_POST['cbhide'] ? true : false;
 
+
 	if ($text == "") {
 		$text = "LCWO";
 	}
@@ -204,7 +205,11 @@ function entryform () {
 </tr>
 </table>
 
-<textarea name="text" id="txt" cols="80" rows="10"></textarea>
+<textarea name="text" id="txt" cols="80" rows="10">
+<?
+    echo end($_SESSION['text2cw']['history']);
+?>
+</textarea>
 <br>
 <input type="hidden" name="sent" value="1">
 <input type="submit" value=" <? echo l('convert',1) ?> ">
@@ -213,7 +218,42 @@ Open text: <input type="file" id="t2c_file" onChange="javascript:load_text(this)
 &nbsp;
 <input id="hide" type="checkbox" onChange="javascript:toggle_hide();" name="cbhide" value="1"<? if ($_SESSION['text2cw']['hide'] == true) { echo " checked "; } ?>> <?=l('hidetext');?>
 </form>
+
+<?
+    $cnt = count($_SESSION['text2cw']['history']);
+
+    if ($cnt > 0) {
+?>
+<h2>History</h2>    
+<table>
+<tr><th>#</th><th><?=l("forumtext");?></th></tr>
+<?
+    for ($i = $cnt-1; $i > 0; $i--) {
+        $txt = $_SESSION['text2cw']['history'][$i];
+        $txt_show = $txt;
+        if (strlen($txt) > 50) {
+            $txt_show = substr($txt, 50)." ...";
+        }
+        $txt = preg_replace('/"/', '\"', $txt);
+        $txt = preg_replace('/\'/', '', $txt);
+        echo "<tr><td>".($i)."</td><td onClick='javascript:txt2form(\"$txt\");'>$txt_show</td></tr>\n";
+    }
+?>
+</table> 
+
+<?
+    } // cnt > 0
+?>
+
+    
+    
 <script>
+
+  function txt2form (t) {
+      var e = document.getElementById('txt');
+      e.value = t;
+  }
+
   var hide = false;
   function toggle_hide() {
       hide = document.getElementById('hide').checked;
@@ -297,24 +337,36 @@ if (locked) {
 
 /* set / initialize session vars */
 function init_text2cw () {
-		if ($_SESSION['uid']) {
-			$_SESSION['text2cw']['cw_speed'] = $_SESSION['cw_speed']; 
-			$_SESSION['text2cw']['cw_eff']  = $_SESSION['cw_eff'];
-			$_SESSION['text2cw']['cw_tone'] = $_SESSION['cw_tone'];
-		}
-		else {
-			$_SESSION['text2cw']['cw_speed'] = 20;
-			$_SESSION['text2cw']['cw_eff']  = 20;
-			$_SESSION['text2cw']['cw_tone'] = 600;
-		}
-		$_SESSION['text2cw']['init'] = 1;
+    if ($_SESSION['uid']) {
+        $_SESSION['text2cw']['cw_speed'] = $_SESSION['cw_speed']; 
+        $_SESSION['text2cw']['cw_eff']  = $_SESSION['cw_eff'];
+        $_SESSION['text2cw']['cw_tone'] = $_SESSION['cw_tone'];
+    }
+    else {
+        $_SESSION['text2cw']['cw_speed'] = 20;
+        $_SESSION['text2cw']['cw_eff']  = 20;
+        $_SESSION['text2cw']['cw_tone'] = 600;
+    }
+    $_SESSION['text2cw']['init'] = 1;
 }
 
 function update_text2cw () {
-		$_SESSION['text2cw']['cw_speed'] = intval($_POST['speed']);
-		$_SESSION['text2cw']['cw_eff']  = intval($_POST['eff']);
-		$_SESSION['text2cw']['cw_tone'] = intval($_POST['freq']);
-		$_SESSION['text2cw']['hide'] = $_POST['cbhide'] ? true : false;
+    $_SESSION['text2cw']['cw_speed'] = intval($_POST['speed']);
+    $_SESSION['text2cw']['cw_eff']  = intval($_POST['eff']);
+    $_SESSION['text2cw']['cw_tone'] = intval($_POST['freq']);
+    $_SESSION['text2cw']['hide'] = $_POST['cbhide'] ? true : false;
+    $text = stripslashes($_POST['text']);
+    $text = str_replace('\\', '', $text);
+
+    if (gettype($_SESSION['text2cw']['history']) == "array") {
+        array_push($_SESSION['text2cw']['history'], $text);
+        while (count($_SESSION['text2cw']['history']) > 6) {
+            array_shift($_SESSION['text2cw']['history']);
+        }
+    }
+    else {
+        $_SESSION['text2cw']['history'] = array($text);
+    }
 }
 
 
