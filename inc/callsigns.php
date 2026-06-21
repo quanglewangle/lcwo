@@ -87,8 +87,7 @@ function check (call) {
 
 	if (call != calls[nr]) {
 			error = true;
-			call = "<span style=\"color:#ff0000\">" + call +
-			"&nbsp;</span>";
+			call = "<span style='color:#ff0000;font-weight:bold;'>" + call + "&nbsp;</span>";
 			if ((cwspeed > 5) && !fixedspeed ) {
 					cwspeed--;
 			}

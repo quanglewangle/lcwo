@@ -449,7 +449,7 @@ function check (word) {
 	var sent_cmp = correct_answer.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
 	
 	if (word_cmp != sent_cmp) {
-			word = "<span style=\"color:#ff0000\">" + word + "&nbsp;</span>";
+			word = "<span style='color:#ff0000;font-weight:bold;'>" + word + "&nbsp;</span>";
 			if (cwspeed > 5) {
 					<?
 						if (!$fixspeed) {

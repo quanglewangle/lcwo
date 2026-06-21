@@ -16,6 +16,7 @@ Started on 2009-02-08.
 
 2026-06-21:
     * Add a history to the text2cw function (suggested by HB9PPC)
+    * Mark errors in callsign and word training in bold (suggested by DC5MHN)
 
 2026-05-10:
     * Added Catalan and Spanish proverbs to plain text training (thanks EA3AGK)
