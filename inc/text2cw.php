@@ -207,7 +207,9 @@ function entryform () {
 
 <textarea name="text" id="txt" cols="80" rows="10">
 <?
-    echo end($_SESSION['text2cw']['history']);
+if (gettype($_SESSION['text2cw']['history']) == "array") {
+	echo end($_SESSION['text2cw']['history']);
+}
 ?>
 </textarea>
 <br>
@@ -228,7 +230,7 @@ Open text: <input type="file" id="t2c_file" onChange="javascript:load_text(this)
 <table>
 <tr><th>#</th><th><?=l("forumtext");?></th></tr>
 <?
-    for ($i = $cnt-1; $i > 0; $i--) {
+    for ($i = $cnt-1; $i >= 0; $i--) {
         $txt = $_SESSION['text2cw']['history'][$i];
         $txt_show = $txt;
         if (strlen($txt) > 50) {
@@ -236,7 +238,7 @@ Open text: <input type="file" id="t2c_file" onChange="javascript:load_text(this)
         }
         $txt = preg_replace('/"/', '\"', $txt);
         $txt = preg_replace('/\'/', '', $txt);
-        echo "<tr><td>".($i)."</td><td onClick='javascript:txt2form(\"$txt\");'>$txt_show</td></tr>\n";
+        echo "<tr><td>".($i+1)."</td><td onClick='javascript:txt2form(\"$txt\");'>$txt_show</td></tr>\n";
     }
 ?>
 </table> 
@@ -360,7 +362,7 @@ function update_text2cw () {
 
     if (gettype($_SESSION['text2cw']['history']) == "array") {
         array_push($_SESSION['text2cw']['history'], $text);
-        while (count($_SESSION['text2cw']['history']) > 6) {
+        while (count($_SESSION['text2cw']['history']) > 5) {
             array_shift($_SESSION['text2cw']['history']);
         }
     }
