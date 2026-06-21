@@ -15,6 +15,7 @@ lcwo_posts.text, lcwo_posts.isreply from lcwo_users INNER JOIN lcwo_posts
 ON lcwo_users.id = lcwo_posts.uid where lcwo_posts.forumid = 0 and lcwo_posts.approved = 1 order by id desc
 limit 10");
 
+$x = 0;
 while ($r = mysqli_fetch_object($q)) {
 $x++;
 

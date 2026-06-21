@@ -131,8 +131,6 @@ global $db;
 function getgroups ($speed, $eff, $lesson, $kochchar, $minutes, $randlength, $realchar) {
 	global $db;
 
-    error_log(print_r($kochchar,1));
-
 	/* Not nice, but I changed things. outside, randomlength=0
 	* now means, random between 2 and 7. Any other value means
 	* fixed groups of this length */
@@ -1574,7 +1572,7 @@ function is_deleted_user() {
 
 function fetch_cookie($username) {
 	global $db;
-    error_log("function fetch_cookie($username);");
+	error_log("function fetch_cookie($username);");
 	$q = mysqli_query($db, "select hash from lcwo_cookies where username='$username'");
 	if ($o = mysqli_fetch_row($q)) {
         error_log("hash exists: = ".$o[0]);

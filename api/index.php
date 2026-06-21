@@ -65,7 +65,7 @@ default:
 }
 
 function keepalive () {
-    if (!$_SESSION['uid']) {
+    if (!array_key_exists('uid', $_SESSION)) {
         echo '{"result": false}';
     }
     else {
@@ -128,7 +128,7 @@ function daily_results () {
     }
 
     // Logged in user's own daily results
-    if ($_SESSION['uid'] && $_SESSION['uid'] == $_GET['u']) {
+    if (array_key_exists('uid', $_SESSION) && $_SESSION['uid'] == $_GET['u']) {
         $userid = $_SESSION['uid'];
     }
     // Viewing other users' daily results: Visible to public must be set

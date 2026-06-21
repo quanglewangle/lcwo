@@ -4,6 +4,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
 include('../inc/connectdb.php');
 include('../inc/definitions.php');
 $myurl= BASEURL;
+$x=0;
 ?>
  
 <feed xmlns="http://www.w3.org/2005/Atom"> 

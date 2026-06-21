@@ -44,12 +44,14 @@ else {
 		else {
 			$valid = 0;
 			$error .= "Password doesn't match.<br>\n";
+			error_log("login_fail $username NOMATCH"); 
 		}
 
 	}
 	else {
 		$valid = 0;
-		$error .= "User $user not found in database.<br>\n";
+		$error .= "User not found in database.<br>\n";
+   		 error_log("login_fail $username NOTFOUND"); 
 	}
 }
 
