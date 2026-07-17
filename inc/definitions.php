@@ -29,7 +29,7 @@ Mail: mail@invalid.invalid");
 # User IDs of special users
 define("TESTUSER",  "1");	# test user - public login. restricted in some ways.
 define("ADMIN",     "2");	# admin user - can enter the admin console /admin
-define("HOSTNAME",  "localhost:8000");
+define("HOSTNAME",  isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : "localhost:8000");
 define("BASEURL",  "http://".HOSTNAME);
 define("DEV",       "1");	# development flag (enables translation stuff)
 

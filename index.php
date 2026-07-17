@@ -103,10 +103,9 @@ include("inc/header.php");
 include("inc/menu.php");
 
 ?>
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-	<tr>
-		<td width="220" valign="top">
-			<? 
+<div class="lcwo-page">
+	<div class="lcwo-sidebar">
+			<?
                 if (!$_SESSION['uid']) {
 ?>
 <script>
@@ -167,15 +166,11 @@ function getCookie (name) {
 				}
 			?>
 			<? include("inc/online.php"); ?>
-		</td>
-		<td valign="top">
+	</div>
+	<div class="lcwo-main">
 			<? include("inc/$p.php"); ?>
-		</td>
-		<td width="20">
-		&nbsp;
-		</td>
-	</tr>
-</table>
+	</div>
+</div>
 
 <?
 include("inc/footer.php");

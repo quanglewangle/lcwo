@@ -55,13 +55,8 @@
 <p><?=l('idea');?>: Ward, K9OX (<a href="http://c2.com/morse/">A Fully Automatic Morse
 Code Teaching Machine</a>).</p>
 
-<form action="/morsemachine" method="POST">
-<table>
-<tr>
-<td>
-Character set: &nbsp;
-</td>
-<td>
+<form action="/morsemachine" method="POST" class="lcwo-mm-charsetform">
+<label>Character set: &nbsp;
 <select onChange="this.form.submit();" name="charset" size="1">
 <?
     $i = 0;
@@ -84,8 +79,7 @@ Character set: &nbsp;
 
 ?>
 </select>
-</td></tr>
-</table>
+</label>
 </form>
 
 
@@ -108,8 +102,7 @@ Character set: &nbsp;
 <?=l('totalchars');?>: <span id="charcount">0</span> &mdash; <span id="response"></span>
 
 
-<table>
-<tr>
+<div class="lcwo-mm-chargrid">
 <?
 	$count = -2;
 	foreach ($cs as $k) {
@@ -122,30 +115,21 @@ Character set: &nbsp;
 		}
 
 		$height2 = 101 - $height1;
-		
-		echo "<td><img style='display:block;' src=\"/pics/mm-0.png\" id=\"$k-0\" onClick=\"changebar(this, event)\" width=\"10px\"".
+
+		echo "<div class=\"lcwo-mm-charcol\"><div class=\"lcwo-mm-bar\">";
+		echo "<img style='display:block;' src=\"/pics/mm-0.png\" id=\"$k-0\" onClick=\"changebar(this, event)\" width=\"10px\"".
 		" height=\"$height1"."px\">";
 		echo "<img style='display:block;' src=\"/pics/mm-1.png\" id=\"$k-1\" onClick=\"changebar(this, event)\" width=\"10px\"".
-		" height=\"".$height2."px\"></td>\n";
-		
+		" height=\"".$height2."px\"></div>";
+		echo "<span id=\"label-$k\">".$k."</span></div>\n";
 	}
 ?>
-</tr>
-<tr>
-<?
-	$count = 0;
-	foreach ($cs as $k) {
-			echo "<td><span id=\"label-$k\">".$k."</span></td>";
-			$count++;
-	}
-?>
-</tr>
-</table>
+</div>
 
 <form onsubmit="enteraction();return false;">
-<input value="" name="entrybox" id="entrybox" size="1"> &nbsp;&mdash;&nbsp; <?=l('mminstructions');?>
+<input value="" name="entrybox" id="entrybox" size="1" inputmode="none" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"> &nbsp;&mdash;&nbsp; <?=l('mminstructions');?>
 <script>
-    document.getElementById('entrybox').addEventListener('keyup', keypressed2); 
+    document.getElementById('entrybox').addEventListener('keyup', keypressed2);
 
     function keypressed2(e) {
         if (e.key == "Control" || e.key.substr(0,5) == "Arrow") {
@@ -158,7 +142,81 @@ Character set: &nbsp;
             keypressed(document.getElementById('entrybox').value);
         }
     }
+
+    /* on-screen key row: lets touchscreen users tap a character instead of
+       hunting for it on the OS keyboard's symbol pages */
+    function tapchar(ch) {
+        var box = document.getElementById('entrybox');
+        if (multi_input) {
+            box.value += ch;
+        }
+        else {
+            box.value = ch;
+            keypressed(ch);
+        }
+        box.focus();
+    }
 </script>
+
+<div class="lcwo-mm-keyrow">
+<?
+	/* Lay the tap row out like a QWERTY keyboard (three staggered letter
+	   rows, then a digit row, then punctuation) so it's easy to scan --
+	   unlike $cs, which is kept in Koch teaching order for the badness-bar
+	   grid above. */
+	$qwerty_rows = Array("QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM");
+	$qwerty_digits = "1234567890";
+
+	$keyrow_letters = $keyrow_digits = $keyrow_punct = Array();
+	foreach ($cs as $k) {
+		if (preg_match('/^[A-Za-z]$/u', $k)) {
+			$keyrow_letters[] = $k;
+		}
+		elseif (preg_match('/^[0-9]$/u', $k)) {
+			$keyrow_digits[] = $k;
+		}
+		else {
+			$keyrow_punct[] = $k;
+		}
+	}
+	sort($keyrow_punct, SORT_STRING);
+
+	$keyrow_button = function ($k) {
+		return "<button type=\"button\" class=\"lcwo-mm-key\" onclick=\"tapchar(this.textContent)\">".htmlspecialchars($k)."</button>";
+	};
+
+	foreach ($qwerty_rows as $i => $row) {
+		$present = array_intersect(str_split($row), $keyrow_letters);
+		if ($present) {
+			echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-row".($i+1)."\">";
+			foreach (str_split($row) as $c) {
+				if (in_array($c, $keyrow_letters)) {
+					echo $keyrow_button($c);
+				}
+			}
+			echo "</div>";
+		}
+	}
+
+	if ($keyrow_digits) {
+		echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-digits\">";
+		foreach (str_split($qwerty_digits) as $c) {
+			if (in_array($c, $keyrow_digits)) {
+				echo $keyrow_button($c);
+			}
+		}
+		echo "</div>";
+	}
+
+	if ($keyrow_punct) {
+		echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-punct\">";
+		foreach ($keyrow_punct as $c) {
+			echo $keyrow_button($c);
+		}
+		echo "</div>";
+	}
+?>
+</div>
 
 
 <br><br>

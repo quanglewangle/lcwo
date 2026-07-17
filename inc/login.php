@@ -10,13 +10,13 @@
 	<tr>
 		<td><? echo l('username'); ?>: </td>
 		<td>
-			<input type="text" size="8" name="username">
+			<input type="text" size="8" name="username" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="username">
 		</td>
 	</tr>
 	<tr>
 		<td><? echo l('password'); ?>: </td>
 		<td>
-			<input type="password" size="8" name="password">
+			<input type="password" size="8" name="password" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="current-password">
 		</td>
 	</tr>
 

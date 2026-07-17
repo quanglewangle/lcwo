@@ -66,10 +66,6 @@ body {
     background: #000;
 }
 
-tr.headerline {
-    filter: brightness(40%);
-}
-
 a {
 	color: #cccccc;
 }
@@ -290,8 +286,223 @@ textarea.LV_field:active {
 			font-family: Verdana, Arial, Helvetica, sans-serif;
 			font-size: 12pt;
 			left: 170px;
-			display: block; 
+			display: block;
 			height: 20px;
 			width: 40px;
 			overflow: hidden;
 		}
+
+/* Responsive layout */
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.lcwo-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	background-image: url(/pics/lcwo-bg2.png);
+	filter: brightness(40%);
+}
+
+.lcwo-header-banner {
+	flex: 1 1 260px;
+	min-width: 0;
+	padding: 4px 8px;
+}
+
+.lcwo-menu {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px 14px;
+	background-image: url(/pics/menu2.png);
+	padding: 6px 8px;
+	margin-bottom: 6px;
+}
+
+.lcwo-page {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 20px;
+	padding: 0 10px;
+}
+
+.lcwo-sidebar {
+	flex: 0 0 220px;
+	max-width: 220px;
+}
+
+.lcwo-main {
+	flex: 1 1 400px;
+	min-width: 0;
+}
+
+.lcwo-mm-charsetform label {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.lcwo-mm-chargrid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2px 8px;
+	margin: 8px 0;
+}
+
+.lcwo-mm-charcol {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+.lcwo-audioplayer {
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+.lcwo-dualplayer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.lcwo-dualplayer > div {
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+.lcwo-practicetext-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 10px;
+}
+
+.lcwo-practicetext-input {
+	flex: 1 1 320px;
+	min-width: 0;
+}
+
+.lcwo-practicetext-input textarea {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.lcwo-practicetext-player {
+	flex: 0 1 auto;
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+.lcwo-practicetext-submit {
+	margin-top: 8px;
+}
+
+.lcwo-mm-keyrow {
+	margin: 10px 0;
+	max-width: 480px;
+}
+
+.lcwo-mm-keyrow-row {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 3px;
+	margin-bottom: 4px;
+}
+
+.lcwo-mm-keyrow-row2 {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.lcwo-mm-keyrow-row3 {
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.lcwo-mm-keyrow-digits {
+	margin-top: 8px;
+}
+
+.lcwo-mm-keyrow-punct {
+	margin-top: 8px;
+	max-width: 50%;
+}
+
+.lcwo-mm-key {
+	flex: 1 1 0;
+	min-width: 0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	min-height: 40px;
+	border-style: outset;
+	border-width: 2px;
+	background-color: #333333;
+	color: #cccccc;
+	cursor: pointer;
+}
+
+.lcwo-mm-key:active {
+	border-style: inset;
+}
+
+@media (max-width: 700px) {
+	.lcwo-page {
+		flex-direction: column;
+		gap: 12px;
+		padding: 0 8px;
+	}
+
+	.lcwo-sidebar {
+		order: 2;
+		flex-basis: auto;
+		max-width: 100%;
+		width: 100%;
+	}
+
+	.lcwo-main {
+		order: 1;
+		flex-basis: auto;
+		width: 100%;
+	}
+
+	.lcwo-header-logo img {
+		height: 50px;
+		width: auto;
+	}
+
+	table {
+		max-width: 100%;
+	}
+
+	.lcwo-sidebar table {
+		width: 100%;
+	}
+
+	input[type=text], input[type=password], input[type=submit], input[type=button], select, textarea {
+		font-size: 16px;
+	}
+
+	input[type=submit], input[type=button] {
+		min-height: 44px;
+		padding: 6px 12px;
+	}
+
+	.lcwo-mm-key {
+		min-height: 46px;
+		font-size: 20px;
+	}
+}

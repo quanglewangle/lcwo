@@ -14,6 +14,7 @@ if (!$tmptitle) {
 }
 ?>Learn CW Online</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" lang="en" content="Learn CW Online - At LCWO you can learn Morse Code (CW) online, in your web browser!">
 <?
 if ($_SESSION['lang'] != "en") {
@@ -68,13 +69,12 @@ curl -L 'https://unpkg.com/cal-heatmap/dist/plugins/Tooltip.min.js' > js/cal-hea
 <script src="/js/cal-heatmap-Tooltip.js"></script>
 
 </head>
-<body bgcolor="#ffffff"> 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-	<tbody>
-		<tr class="headerline">
-			<td style="background-image:url(/pics/lcwo-bg2.png);" width="41%">
-			<a href="/"><img style="border-style:none;" src="/pics/lcwo.png" height="75" width="214" title="LCWO - Home" alt="[LCWO LOGO]"></a> </td>
-			<td style="background-image:url(/pics/lcwo-bg2.png);" width="59%"> 
+<body>
+<div class="lcwo-header">
+	<div class="lcwo-header-logo">
+		<a href="/"><img style="border-style:none;" src="/pics/lcwo.png" height="75" width="214" title="LCWO - Home" alt="[LCWO LOGO]"></a>
+	</div>
+	<div class="lcwo-header-banner">
 <?
 	if (DEV) {
 ?>			
@@ -115,7 +115,8 @@ Please be aware of LCWO's <a href="/privacy">privacy policy</a> to comply with t
 ?>
 
 &nbsp;
-</td> </tr> </tbody></table>
+	</div>
+</div>
 <script>
 function agree_policy () {
 	var i = document.getElementById("consent");

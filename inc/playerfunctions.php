@@ -122,12 +122,12 @@ JS;
 
 		/* Create Player depending on Layout */
 		if ($layout == 1) {	/* small (e.g. char previews) */
-			echo " <div style=\"width:370px;border-width:thin;border-style:dashed; text-align:center;padding:6px\">";
+			echo " <div class=\"lcwo-audioplayer\" style=\"width:370px;border-width:thin;border-style:dashed; text-align:center;padding:6px\">";
 			echo "<table><tr><td>".$buttonhtml.
 				"</td><td>&nbsp;$playerhtml</td></tr></table></div>\n";
 		}
 		else if ($layout == 0) {	/* full */
-			echo " <div style=\"width:280px;border-width:thin;border-style:".
+			echo " <div class=\"lcwo-audioplayer\" style=\"width:280px;border-width:thin;border-style:".
 					"dashed; text-align:center;padding:2px\"><br>";
 			echo $playerhtml;
 			echo "<br><br><p>$buttonhtml</p>";
