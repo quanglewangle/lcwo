@@ -279,7 +279,7 @@ else {
 
 <form action="/courselesson" method="POST" id="eform" class="lcwo-practicetext">
 <div class="lcwo-practicetext-row">
-	<div class="lcwo-practicetext-input"><textarea id="textinput" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off"  name="input" cols="40" rows="10"></textarea></div>
+	<div class="lcwo-practicetext-input"><textarea id="textinput" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" inputmode="none" name="input" cols="40" rows="10"></textarea></div>
 	<div class="lcwo-practicetext-player">
 
 <?
@@ -304,6 +304,87 @@ player("$playertext", $_SESSION['player'], $_SESSION['cw_speed'], $_SESSION['cw_
 
 	</div>
 </div>
+
+<div class="lcwo-mm-keyrow">
+<?
+	/* same tap-to-enter keyboard idea as Morse Machine, but appends to the
+	   textarea instead of submitting immediately, since practice text is
+	   multi-character groups rather than one letter at a time */
+	$qwerty_rows = Array("QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM");
+
+	$cl_keyrow_letters = $cl_keyrow_digits = $cl_keyrow_punct = Array();
+	foreach ($kochchar as $k) {
+		if (preg_match('/^[A-Za-z]$/u', $k)) {
+			$cl_keyrow_letters[] = $k;
+		}
+		elseif (preg_match('/^[0-9]$/u', $k)) {
+			$cl_keyrow_digits[] = $k;
+		}
+		else {
+			$cl_keyrow_punct[] = $k;
+		}
+	}
+	sort($cl_keyrow_punct, SORT_STRING);
+
+	$cl_keyrow_button = function ($k) {
+		return "<button type=\"button\" class=\"lcwo-mm-key\" onclick=\"cl_tapchar(this.textContent)\">".htmlspecialchars($k)."</button>";
+	};
+
+	foreach ($qwerty_rows as $i => $row) {
+		$present = array_intersect(str_split($row), $cl_keyrow_letters);
+		if ($present) {
+			echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-row".($i+1)."\">";
+			foreach (str_split($row) as $c) {
+				if (in_array($c, $cl_keyrow_letters)) {
+					echo $cl_keyrow_button($c);
+				}
+			}
+			echo "</div>";
+		}
+	}
+
+	if ($cl_keyrow_digits) {
+		echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-digits\">";
+		foreach (str_split("1234567890") as $c) {
+			if (in_array($c, $cl_keyrow_digits)) {
+				echo $cl_keyrow_button($c);
+			}
+		}
+		echo "</div>";
+	}
+
+	if ($cl_keyrow_punct) {
+		echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-punct\">";
+		foreach ($cl_keyrow_punct as $c) {
+			echo $cl_keyrow_button($c);
+		}
+		echo "</div>";
+	}
+?>
+	<div class="lcwo-mm-keyrow-row lcwo-mm-keyrow-controls">
+		<button type="button" class="lcwo-mm-key lcwo-mm-key-space" onclick="cl_space()">Space &#9251;</button>
+		<button type="button" class="lcwo-mm-key lcwo-mm-key-backspace" onclick="cl_backspace()">&#9003;</button>
+	</div>
+</div>
+
+<script>
+	function cl_tapchar(ch) {
+		var box = document.getElementById('textinput');
+		box.value += ch;
+		box.focus();
+	}
+	function cl_space() {
+		var box = document.getElementById('textinput');
+		box.value += ' ';
+		box.focus();
+	}
+	function cl_backspace() {
+		var box = document.getElementById('textinput');
+		box.value = box.value.slice(0, -1);
+		box.focus();
+	}
+</script>
+
 <div class="lcwo-practicetext-submit">
 	<?
 

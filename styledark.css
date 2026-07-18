@@ -459,6 +459,18 @@ img {
 	border-style: inset;
 }
 
+.lcwo-mm-keyrow-controls {
+	margin-top: 8px;
+}
+
+.lcwo-mm-key-space {
+	flex: 4 1 0;
+}
+
+.lcwo-mm-key-backspace {
+	flex: 1 1 0;
+}
+
 @media (max-width: 700px) {
 	.lcwo-page {
 		flex-direction: column;

@@ -352,23 +352,102 @@ if ($_SESSION['player'] != PL_JSCWLIB) {
 </div>
 
 
-<form action="/groups" method="POST" id="eform">
-<table>
-	<tr>
-	<td><textarea id="textinput" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" name="input" cols="40" rows="10"></textarea></td>
-	<td>
-	&nbsp;
+<form action="/groups" method="POST" id="eform" class="lcwo-practicetext">
+<div class="lcwo-practicetext-row">
+	<div class="lcwo-practicetext-input"><textarea id="textinput" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" inputmode="none" name="input" cols="40" rows="10"></textarea></div>
+	<div class="lcwo-practicetext-player">
 
-	<? player($playertext, $_SESSION['player'], $_SESSION['cw_speed'], $_SESSION['cw_eff'],0, 1, 0, 1); ?>
+<? player($playertext, $_SESSION['player'], $_SESSION['cw_speed'], $_SESSION['cw_eff'],0, 1, 0, 1); ?>
 
-    <br>
-	</td>
-	</tr>
-	<tr>
-	<td>
+	</div>
+</div>
+
+<div class="lcwo-mm-keyrow">
+<?
+	/* same tap-to-enter keyboard idea as Morse Machine / course lesson, but
+	   appends to the textarea instead of submitting immediately, and scoped
+	   to the character set for the current groups mode (letters/figures/
+	   mixed/custom) rather than a fixed Koch lesson list */
+	$qwerty_rows = Array("QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM");
+
+	$gr_keyrow_letters = $gr_keyrow_digits = $gr_keyrow_punct = Array();
+	foreach ($char as $k) {
+		$ku = mb_strtoupper($k);
+		if (preg_match('/^[A-Z]$/u', $ku)) {
+			$gr_keyrow_letters[] = $ku;
+		}
+		elseif (preg_match('/^[0-9]$/u', $ku)) {
+			$gr_keyrow_digits[] = $ku;
+		}
+		else {
+			$gr_keyrow_punct[] = $ku;
+		}
+	}
+	sort($gr_keyrow_punct, SORT_STRING);
+
+	$gr_keyrow_button = function ($k) {
+		return "<button type=\"button\" class=\"lcwo-mm-key\" onclick=\"gr_tapchar(this.textContent)\">".htmlspecialchars($k)."</button>";
+	};
+
+	foreach ($qwerty_rows as $i => $row) {
+		$present = array_intersect(str_split($row), $gr_keyrow_letters);
+		if ($present) {
+			echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-row".($i+1)."\">";
+			foreach (str_split($row) as $c) {
+				if (in_array($c, $gr_keyrow_letters)) {
+					echo $gr_keyrow_button($c);
+				}
+			}
+			echo "</div>";
+		}
+	}
+
+	if ($gr_keyrow_digits) {
+		echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-digits\">";
+		foreach (str_split("1234567890") as $c) {
+			if (in_array($c, $gr_keyrow_digits)) {
+				echo $gr_keyrow_button($c);
+			}
+		}
+		echo "</div>";
+	}
+
+	if ($gr_keyrow_punct) {
+		echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-punct\">";
+		foreach ($gr_keyrow_punct as $c) {
+			echo $gr_keyrow_button($c);
+		}
+		echo "</div>";
+	}
+?>
+	<div class="lcwo-mm-keyrow-row lcwo-mm-keyrow-controls">
+		<button type="button" class="lcwo-mm-key lcwo-mm-key-space" onclick="gr_space()">Space &#9251;</button>
+		<button type="button" class="lcwo-mm-key lcwo-mm-key-backspace" onclick="gr_backspace()">&#9003;</button>
+	</div>
+</div>
+
+<script>
+	function gr_tapchar(ch) {
+		var box = document.getElementById('textinput');
+		box.value += ch;
+		box.focus();
+	}
+	function gr_space() {
+		var box = document.getElementById('textinput');
+		box.value += ' ';
+		box.focus();
+	}
+	function gr_backspace() {
+		var box = document.getElementById('textinput');
+		box.value = box.value.slice(0, -1);
+		box.focus();
+	}
+</script>
+
+<div class="lcwo-practicetext-submit">
 	<?
 		$text2 = $text;
-            if ($_SESSION['vvv'] == 1 && $_SESSION['player'] != PL_JSCWLIB) { 
+            if ($_SESSION['vvv'] == 1 && $_SESSION['player'] != PL_JSCWLIB) {
                 $text2 = mb_substr($text2, 6);
 				$text2 = mb_substr($text2, 0, -5);
             }
@@ -378,10 +457,7 @@ if ($_SESSION['player'] != PL_JSCWLIB) {
         <input type="hidden" name="length" id="length" value="0">
         <input type="hidden" name="paris" id="paris" value="0">
         <input type="submit" value=" <? echo l('checkresult',1); ?> " onClick="try { document.getElementById('length').value = pa[1].textEnd - pa[1].textStart; document.getElementById('paris').value = pa[1].paris; } catch {} return checkspaces();"> (<? echo l('notcasesensitive'); ?>)
-	</td>
-</table>
-
-
+</div>
 </form>
 
 <script>
