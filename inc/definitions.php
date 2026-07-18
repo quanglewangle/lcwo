@@ -29,7 +29,23 @@ Mail: mail@invalid.invalid");
 # User IDs of special users
 define("TESTUSER",  "1");	# test user - public login. restricted in some ways.
 define("ADMIN",     "2");	# admin user - can enter the admin console /admin
-define("HOSTNAME",  isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : "localhost:8000");
+
+# Trust the Host header only for localhost / private-LAN addresses, so a dev
+# server can be reached from a phone/tablet on the same network. Real
+# deployments should set HOSTNAME explicitly in definitions.custom.php
+# instead of relying on this -- trusting an arbitrary Host header is a
+# host-header-injection risk (it feeds lostpassword.php's reset links and
+# RSS/canonical URLs).
+function lcwo_dev_hostname_allowed($host) {
+	$host = preg_replace('/:\d+$/', '', $host);
+	if (in_array($host, array('localhost', '127.0.0.1', '::1'), true)) {
+		return true;
+	}
+	return (bool) preg_match('/^(10\.|192\.168\.|172\.(1[6-9]|2[0-9]|3[0-1])\.)/', $host);
+}
+
+define("HOSTNAME",  (isset($_SERVER['HTTP_HOST']) && lcwo_dev_hostname_allowed($_SERVER['HTTP_HOST']))
+	? $_SERVER['HTTP_HOST'] : "localhost:8000");
 define("BASEURL",  "http://".HOSTNAME);
 define("DEV",       "1");	# development flag (enables translation stuff)
 
