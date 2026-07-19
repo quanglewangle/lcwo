@@ -1,12 +1,14 @@
+Posted as: https://github.com/dj1yfk/lcwo/issues/7
+
 Title:
-Proposal: mobile-responsive layout for Morse Machine, course lesson, and Code Groups trainer pages
+Proposal: mobile-responsive layout with Morse character set aware keyboard for drill pages
 
 Body:
 Hi Fabian,
 
 I've been experimenting locally with making a couple of LCWO's pages mobile-friendly, and wanted to check if this is something you'd be interested in before I clean it up as a PR.
 
-**Motivation:** I'd like to practice CW away from my desktop (e.g. on a commute/journey) using a phone or tablet. Right now the layout is fixed-width tables with no viewport meta tag, so it doesn't really work on a small screen — content is either too zoomed-out to read or requires horizontal scrolling.
+**Motivation:** I'd like to practice CW away from my desktop (e.g. on a commute/journey) using a phone or tablet. Right now the layout is fixed-width tables with no viewport meta tag, so it doesn't really work on a small screen — content is either too zoomed-out to read or requires horizontal scrolling, and on-screen keyboards need several taps for non-alphanumeric characters.
 
 **Scope of what I've tried so far** (deliberately narrow — not proposing to touch the whole site). This covers all three pages under "Koch method course" in the sidebar, plus the Code Groups trainer under "Speed practice":
 
@@ -18,7 +20,7 @@ I've been experimenting locally with making a couple of LCWO's pages mobile-frie
 - Code Groups page (`/groups`): same practice-text layout and on-screen keyboard treatment as the course lesson page, but the keyboard is built from whichever character set the current mode actually uses (letters/figures/mixed/custom) rather than a fixed lesson list.
 - Small unrelated-but-related fix: the login form was missing `autocapitalize="off"` etc., so mobile keyboards were auto-capitalizing the first letter of usernames/passwords and breaking login on touch devices.
 
-**Testing so far:** running locally (PHP built-in server + MariaDB, no Docker), and also deployed to a live demo at https://lcwo.fimblefowl.co.uk running under nginx/MariaDB (closer to a real deployment than the local built-in server). I've verified Morse Machine, both course pages, and login work correctly on both a phone and a tablet, and smoke-tested that the shared-chrome change doesn't introduce PHP errors on forum/admin/profile/usergroups/highscores/cwsettings/etc. — but I haven't done a full visual pass on those other pages yet. The Code Groups change is newest and hasn't had the on-device pass yet either — it's live on the demo and passes a PHP lint check, but no phone/tablet walkthrough yet.
+**Testing so far:** running locally (PHP built-in server + MariaDB, no Docker), and also deployed to a live demo (see link below) running under nginx/MariaDB (closer to a real deployment than the local built-in server). I've verified Morse Machine, both course pages, and login work correctly on both a phone and a tablet, and smoke-tested that the shared-chrome change doesn't introduce PHP errors on forum/admin/profile/usergroups/highscores/cwsettings/etc. — but I haven't done a full visual pass on those other pages yet. The Code Groups change is newest and hasn't had the on-device pass yet either — it's live on the demo and passes a PHP lint check, but no phone/tablet walkthrough yet.
 
 If you'd like to try it on your own phone rather than reading a diff, I've put up a live copy at https://lcwo.fimblefowl.co.uk — this is a temporary personal demo (not production data), just there for you to poke at while this is under discussion, and I'll take it down once we're done with it.
 
