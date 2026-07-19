@@ -6,9 +6,11 @@ cal.paint({
     range: 12,
     scale: {
         color: {
-            range: ['#ccec2e', '#a6c027'],
+            /* light -> dark single-hue ramp, so days with more practices are
+               visibly darker rather than all landing on ~the same green */
+            range: ['#e5f5e0', '#00441b'],
             type: 'linear',
-            interpolate: 'hsl',
+            interpolate: 'hcl',
             domain: [0, 15]
         }
     },
