@@ -427,20 +427,34 @@ if ($_SESSION['player'] != PL_JSCWLIB) {
 </div>
 
 <script>
-	function gr_tapchar(ch) {
+	function gr_insert(str) {
 		var box = document.getElementById('textinput');
-		box.value += ch;
+		var start = box.selectionStart, end = box.selectionEnd;
+		if (start === null || end === null) {
+			start = end = box.value.length;
+		}
+		box.value = box.value.slice(0, start) + str + box.value.slice(end);
 		box.focus();
+		box.selectionStart = box.selectionEnd = start + str.length;
+	}
+	function gr_tapchar(ch) {
+		gr_insert(ch);
 	}
 	function gr_space() {
-		var box = document.getElementById('textinput');
-		box.value += ' ';
-		box.focus();
+		gr_insert(' ');
 	}
 	function gr_backspace() {
 		var box = document.getElementById('textinput');
-		box.value = box.value.slice(0, -1);
+		var start = box.selectionStart, end = box.selectionEnd;
+		if (start === null || end === null) {
+			start = end = box.value.length;
+		}
+		if (start == end && start > 0) {
+			start -= 1;
+		}
+		box.value = box.value.slice(0, start) + box.value.slice(end);
 		box.focus();
+		box.selectionStart = box.selectionEnd = start;
 	}
 </script>
 

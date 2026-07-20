@@ -368,20 +368,34 @@ player("$playertext", $_SESSION['player'], $_SESSION['cw_speed'], $_SESSION['cw_
 </div>
 
 <script>
-	function cl_tapchar(ch) {
+	function cl_insert(str) {
 		var box = document.getElementById('textinput');
-		box.value += ch;
+		var start = box.selectionStart, end = box.selectionEnd;
+		if (start === null || end === null) {
+			start = end = box.value.length;
+		}
+		box.value = box.value.slice(0, start) + str + box.value.slice(end);
 		box.focus();
+		box.selectionStart = box.selectionEnd = start + str.length;
+	}
+	function cl_tapchar(ch) {
+		cl_insert(ch);
 	}
 	function cl_space() {
-		var box = document.getElementById('textinput');
-		box.value += ' ';
-		box.focus();
+		cl_insert(' ');
 	}
 	function cl_backspace() {
 		var box = document.getElementById('textinput');
-		box.value = box.value.slice(0, -1);
+		var start = box.selectionStart, end = box.selectionEnd;
+		if (start === null || end === null) {
+			start = end = box.value.length;
+		}
+		if (start == end && start > 0) {
+			start -= 1;
+		}
+		box.value = box.value.slice(0, start) + box.value.slice(end);
 		box.focus();
+		box.selectionStart = box.selectionEnd = start;
 	}
 </script>
 
