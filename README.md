@@ -1,8 +1,14 @@
 # LCWO - Learn CW Online Code Repository
 
+**This is quanglewangle's fork**, adding a mobile-responsive layout and a
+tap-to-enter on-screen keyboard to the Morse Machine, course lesson, and
+Code Groups trainer pages. Live demo: https://lcwo.fimblefowl.co.uk —
+background in [issue #7](https://github.com/dj1yfk/lcwo/issues/7) on the
+upstream mirror.
+
 This is the source repository for *Learn CW Online*, a website to learn and
 practice Morse code in the browser. The official website of LCWO is
-https://lcwo.net/. The code can be found at https://git.fkurz.net/dj1yfk/lcwo
+https://lcwo.net/. The official code can be found at https://git.fkurz.net/dj1yfk/lcwo
 
 The code is licensed under the GNU AGPL 3. 
 
