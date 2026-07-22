@@ -389,6 +389,16 @@ if ($_SESSION['player'] != PL_JSCWLIB) {
 		return "<button type=\"button\" class=\"lcwo-mm-key\" onclick=\"gr_tapchar(this.textContent)\">".htmlspecialchars($k)."</button>";
 	};
 
+	if ($gr_keyrow_digits) {
+		echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-digits\">";
+		foreach (str_split("1234567890") as $c) {
+			if (in_array($c, $gr_keyrow_digits)) {
+				echo $gr_keyrow_button($c);
+			}
+		}
+		echo "</div>";
+	}
+
 	foreach ($qwerty_rows as $i => $row) {
 		$present = array_intersect(str_split($row), $gr_keyrow_letters);
 		if ($present) {
@@ -400,16 +410,6 @@ if ($_SESSION['player'] != PL_JSCWLIB) {
 			}
 			echo "</div>";
 		}
-	}
-
-	if ($gr_keyrow_digits) {
-		echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-digits\">";
-		foreach (str_split("1234567890") as $c) {
-			if (in_array($c, $gr_keyrow_digits)) {
-				echo $gr_keyrow_button($c);
-			}
-		}
-		echo "</div>";
 	}
 
 	if ($gr_keyrow_punct) {

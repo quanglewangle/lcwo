@@ -194,6 +194,16 @@ Code Teaching Machine</a>).</p>
 		return "<button type=\"button\" class=\"lcwo-mm-key\" onclick=\"tapchar(this.textContent)\">".htmlspecialchars($k)."</button>";
 	};
 
+	if ($keyrow_digits) {
+		echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-digits\">";
+		foreach (str_split($qwerty_digits) as $c) {
+			if (in_array($c, $keyrow_digits)) {
+				echo $keyrow_button($c);
+			}
+		}
+		echo "</div>";
+	}
+
 	foreach ($qwerty_rows as $i => $row) {
 		$present = array_intersect(str_split($row), $keyrow_letters);
 		if ($present) {
@@ -205,16 +215,6 @@ Code Teaching Machine</a>).</p>
 			}
 			echo "</div>";
 		}
-	}
-
-	if ($keyrow_digits) {
-		echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-digits\">";
-		foreach (str_split($qwerty_digits) as $c) {
-			if (in_array($c, $keyrow_digits)) {
-				echo $keyrow_button($c);
-			}
-		}
-		echo "</div>";
 	}
 
 	if ($keyrow_punct) {

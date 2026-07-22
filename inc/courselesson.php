@@ -330,6 +330,16 @@ player("$playertext", $_SESSION['player'], $_SESSION['cw_speed'], $_SESSION['cw_
 		return "<button type=\"button\" class=\"lcwo-mm-key\" onclick=\"cl_tapchar(this.textContent)\">".htmlspecialchars($k)."</button>";
 	};
 
+	if ($cl_keyrow_digits) {
+		echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-digits\">";
+		foreach (str_split("1234567890") as $c) {
+			if (in_array($c, $cl_keyrow_digits)) {
+				echo $cl_keyrow_button($c);
+			}
+		}
+		echo "</div>";
+	}
+
 	foreach ($qwerty_rows as $i => $row) {
 		$present = array_intersect(str_split($row), $cl_keyrow_letters);
 		if ($present) {
@@ -341,16 +351,6 @@ player("$playertext", $_SESSION['player'], $_SESSION['cw_speed'], $_SESSION['cw_
 			}
 			echo "</div>";
 		}
-	}
-
-	if ($cl_keyrow_digits) {
-		echo "<div class=\"lcwo-mm-keyrow-row lcwo-mm-keyrow-digits\">";
-		foreach (str_split("1234567890") as $c) {
-			if (in_array($c, $cl_keyrow_digits)) {
-				echo $cl_keyrow_button($c);
-			}
-		}
-		echo "</div>";
 	}
 
 	if ($cl_keyrow_punct) {
