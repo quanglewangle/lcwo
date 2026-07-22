@@ -156,6 +156,15 @@ Code Teaching Machine</a>).</p>
         }
         box.focus();
     }
+
+    /* mirror the physical-keyboard shortcuts (space to repeat, any arrow
+       key to reveal the answer) as tappable buttons */
+    function mm_repeat() {
+        var box = document.getElementById('entrybox');
+        box.value = ' ';
+        keypressed(' ');
+        box.focus();
+    }
 </script>
 
 <div class="lcwo-mm-keyrow">
@@ -216,6 +225,10 @@ Code Teaching Machine</a>).</p>
 		echo "</div>";
 	}
 ?>
+<div class="lcwo-mm-keyrow-row lcwo-mm-keyrow-controls">
+	<button type="button" class="lcwo-mm-key" onclick="mm_repeat()">Repeat &#8635;</button>
+	<button type="button" class="lcwo-mm-key" onclick="showsolution()">Answer &#8599;</button>
+</div>
 </div>
 
 
